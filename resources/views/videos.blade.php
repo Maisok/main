@@ -14,8 +14,9 @@
     @foreach ($arr as $ar)
     <div>
     <p><a>Название:</a>{{$ar->title}} <span>Описание:</span>{{$ar->description}}</p>
+
     <video width="400" height="300" controls="controls">
-   <source src="{{"../"}}{{'storage/video/' . $ar->videoSRC}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+   <source src="{{'../' . 'app/video/' . $ar->videoSRC}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
 </div>
         @endforeach
