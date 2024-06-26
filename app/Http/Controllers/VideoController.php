@@ -12,9 +12,17 @@ class VideoController extends Controller
     }
 
     public function show($id){ 
-        $arr=DB::table('videos')->select('id', 'title','description', 'videoSRC')->where('id', $id)->get();                
+        $arr=DB::table('videos')->select('*')->where('id', $id)->get();     
+        foreach ($arr as $video){
+            $user_id=$video->user_id;
+        }
+        $user=DB::table('users')->select('name')->where('id', $user_id)->get();
+        foreach ($user as $user_name){
+            $name=$user_name->name;
+        }
         return view('videos', [
-            'arr' => $arr
+           'arr' => $arr, 
+            'name'=> $name
         ]);
     }
 }

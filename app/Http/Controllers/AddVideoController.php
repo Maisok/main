@@ -15,7 +15,7 @@ class AddVideoController extends Controller
         $ext = $request->file('video')->getClientOriginalExtension();
         $ext2 = $request->file('image')->getClientOriginalExtension();
 
-        if ($ext != 'mp4' && ($ext2!='jpeg' || $ext2!='jpg')) {
+        if ($ext != 'mp4' && ($ext2 != 'jpeg' || $ext2!='jpg')) {
             echo 'dsffsdf';
         } else {
             $origname = $request->file('video')->getClientOriginalName();
@@ -24,14 +24,14 @@ class AddVideoController extends Controller
             $origname2 = $request->file('image')->getClientOriginalName();
             $unicname2 = time() . '_' . $origname2;
 
-            $request->file('video')->storeAs('video', $unicname, 'public');
-            $request->file('image')->storeAs('image', $unicname2, 'public');
+            $request->file('video')->storeAs('video', $unicname);
+            $request->file('image')->storeAs('image', $unicname2);
 
 
             DB::table('videos')->insert([
                 'title' => $name,
                 'description' => $desc,
-                'channels_id' => '1',
+                'user_id' => '1',
                 'videoSRC' => $unicname,
                 'imageSRC' => $unicname2
             ]);

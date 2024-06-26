@@ -7,7 +7,7 @@ class ShowVideosController extends Controller
 { 
     public function show()
     {
-        $arr=DB::table('videos')->select('id', 'title','description', 'imageSRC')->limit(10)->get();
+        $arr=DB::table('videos')->select('*')->limit(10)->get();
         return view('main', [
             'arr' => $arr
         ]);
