@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Channels;
+use App\Models\Categories;
+use Auth;
 
 class AddVideoController extends Controller
 {
     public function addvideos(Request $request)
     {
+        
         $name = $request->input('name');
         $desc = $request->input('desc');
         $ext = $request->file('video')->getClientOriginalExtension();
@@ -18,6 +20,8 @@ class AddVideoController extends Controller
         if ($ext != 'mp4' && ($ext2 != 'jpeg' || $ext2!='jpg')) {
             echo 'dsffsdf';
         } else {
+            $catid=$request->input('category');
+
             $origname = $request->file('video')->getClientOriginalName();
             $unicname = time() . '_' . $origname;
 
@@ -26,16 +30,22 @@ class AddVideoController extends Controller
 
             $request->file('video')->storeAs('video', $unicname);
             $request->file('image')->storeAs('image', $unicname2);
-
-
+                
             DB::table('videos')->insert([
                 'title' => $name,
                 'description' => $desc,
-                'user_id' => '1',
+                'user_id' => Auth::id(),
+                'categories_id' => $catid,
                 'videoSRC' => $unicname,
                 'imageSRC' => $unicname2
             ]);
             return to_route("main");
         }
+    }
+
+
+    public function showcategory(){
+        $category = Categories::select('id', 'name')->get();
+        return view("addvideo", ['catarr'=>$category]);
     }
 }

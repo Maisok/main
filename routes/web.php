@@ -1,15 +1,18 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShowAdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('main');
 });
 
-// Route::get('dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('admin', [ShowAdminController::class, 'showvideos'])->middleware(['auth', 'verified'])->name('admin');
+
+Route::middleware('auth')->group(function () {
+    Route::post('admin', [ShowAdminController::class, 'admincat'])->name('admin.cat');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,9 +36,7 @@ Route::get("users", [UsersController::class, 'index']);
 Route::get("users/{id}", [UsersController::class, 'show']);
 
 use App\Http\Controllers\AddVideoController;
-Route::get('addvideo', function () {
-    return view('addvideo');
-})->name('addvideo');
+Route::get('addvideo', [AddVideoController::class, 'showcategory'])->name('addvideo');
 
 Route::post('pushvideos', [AddVideoController::class, 'addvideos'])->name('pushvideos');
 

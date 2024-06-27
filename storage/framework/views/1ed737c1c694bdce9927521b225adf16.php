@@ -13,7 +13,7 @@
 
     <?php $__currentLoopData = $arr; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ar): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div>
-            <p><a>Название:</a><?php echo e($ar->title); ?> <span>Описание:</span><?php echo e($ar->description); ?> Канал:<?php echo e($name); ?></p>
+            <p><a>Название:</a><?php echo e($ar->title); ?> <span>Описание:</span><?php echo e($ar->description); ?> Канал:<?php echo e($name); ?> Категория:<?php echo e($category_name); ?></p>
             <video width="400" height="300" controls="controls">
                 <source src="<?php echo e('../' . 'video/' . $ar->videoSRC); ?>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
             </video>
