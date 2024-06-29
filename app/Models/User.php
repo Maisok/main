@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Videos;
-
+use App\Models\Like;
+use App\Models\Dislike;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -15,6 +16,14 @@ class User extends Authenticatable
 
     public function videos(){
         return $this->hasMany(Videos::class);
+    }
+
+    public function likes(){
+        return $this->hasOne(Like::class);
+    }
+
+    public function dislikes(){
+        return $this->hasOne(Dislike::class);
     }
 
 

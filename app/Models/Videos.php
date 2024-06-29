@@ -10,7 +10,14 @@ class Videos extends Model
 {
     use HasFactory;
 
-    public function channel(){
-        return $this->belongsTo(Channels::class);
+
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
+
+    public function dislikes(){
+        return $this->hasMany(Dislike::class);
+    }
+
+
 }

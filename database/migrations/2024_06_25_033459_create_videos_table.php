@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('imageSRC');
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Categories::class)->constrained();
+            $table->enum('status', ['none', 'breach', 'shadowBan','ban'])->default('none');
             $table->timestamps();
         });
     }
