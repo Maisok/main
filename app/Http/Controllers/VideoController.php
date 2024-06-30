@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Comment;
+use App\Models\User;
 use App\Models\Videos;
 use Illuminate\Support\Facades\DB;
 
@@ -20,18 +23,19 @@ class VideoController extends Controller
                 $category_name=$value->name;
             }
         }
-
-
-
-
         $user=DB::table('users')->select('name')->where('id', $user_id)->get();
         foreach ($user as $user_name){
             $name=$user_name->name;
         }
+
+        $comments=Comment::where('videos_id', $id)->join('users','user_id','=','users.id')->get();
+
+
         return view('videos', [
            'arr' => $arr, 
             'name'=> $name,
-            'category_name'=>$category_name
+            'category_name'=>$category_name,
+            'comments'=> $comments
         ]);
     }
 }

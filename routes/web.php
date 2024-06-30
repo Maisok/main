@@ -13,6 +13,7 @@ Route::get('admin', [ShowAdminController::class, 'showvideos',])->middleware(['a
 
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\DislikeController;
+use App\Http\Controllers\CommentController;
 
 Route::middleware('auth')->group(function () {
     Route::post('admin', [ShowAdminController::class, 'admincat'])->name('admin.cat');
@@ -20,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::put('editvideo', [ShowAdminController::class, 'editvideo'])->name('editvideo');
     Route::post('like', [LikeController::class, 'likeadd'])->name('like');
     Route::post('dislike', [DislikeController::class, 'dislikeadd'])->name('dislike');
+    Route::post('comments', [CommentController::class, 'addcomments'])->name('comments');
+    Route::post('editcomment', [CommentController::class, 'editcomment'])->name('editcomment');
+    Route::delete('deletecomment', [CommentController::class, 'deletecomment'])->name('deletecomment');
 });
 
 

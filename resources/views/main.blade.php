@@ -5,7 +5,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                 @foreach ($arr as $ar)
                     <p><a href="{{route('videos', $ar->id)}}">Название:</a>{{$ar->title}} <span>Описание:</span>{{$ar->description}} </p>
-                    <img src="{{'image/' . $ar->imageSRC}}" alt="fgh" width="500px">
+                    <img src="{{'image' . '/' . $ar->imageSRC}}" alt="fgh" width="500px">
                 @endforeach
                 </div>
             </div>

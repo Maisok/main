@@ -28,8 +28,8 @@ class AddVideoController extends Controller
             $origname2 = $request->file('image')->getClientOriginalName();
             $unicname2 = time() . '_' . $origname2;
 
-            $request->file('video')->storeAs('video', $unicname);
-            $request->file('image')->storeAs('image', $unicname2);
+            $request->file('video')->storeAs('public/video', $unicname);
+            $request->file('image')->storeAs('public/image', $unicname2);
                 
             DB::table('videos')->insert([
                 'title' => $name,
