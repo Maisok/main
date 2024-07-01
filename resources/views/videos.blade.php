@@ -10,7 +10,6 @@
                 <source src="{{asset('storage/video') . '/' . $ar->videoSRC}}"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
             </video>
-            {{Auth::user()}}
             @if(Auth::check())
                 <form method="post" action="{{route('like')}}">
                     @csrf
@@ -30,7 +29,7 @@
                     @csrf
                     <input type="text" value="{{$ar->id}}" hidden name="video_id">
                     <span>Оставьте комментарий</span>
-                    <textarea name="text" required></textarea>
+                    <textarea name="text" required maxlength="255"></textarea>
                     <button>Отпрваить</button>
                 </form>
             @endif
@@ -39,7 +38,7 @@
                 <span>Комментарии</span>
                 @foreach ($comments as $comment)
                     <div>
-                        <span>{{$comment->name}}:{{$comment->text}}</span>
+                        <div class="w-[800px] text-1xl break-words">{{$comment->name}}:{{$comment->text}}</div>
                         @if (Auth::check())
                             @if ($comment->user_id == Auth::user()->id)
 

@@ -20,8 +20,6 @@
                 <source src="<?php echo e(asset('storage/video') . '/' . $ar->videoSRC); ?>"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
             </video>
-            <?php echo e(Auth::user()); ?>
-
             <?php if(Auth::check()): ?>
                 <form method="post" action="<?php echo e(route('like')); ?>">
                     <?php echo csrf_field(); ?>
@@ -41,7 +39,7 @@
                     <?php echo csrf_field(); ?>
                     <input type="text" value="<?php echo e($ar->id); ?>" hidden name="video_id">
                     <span>Оставьте комментарий</span>
-                    <textarea name="text" required></textarea>
+                    <textarea name="text" required maxlength="255"></textarea>
                     <button>Отпрваить</button>
                 </form>
             <?php endif; ?>
@@ -50,7 +48,7 @@
                 <span>Комментарии</span>
                 <?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div>
-                        <span><?php echo e($comment->name); ?>:<?php echo e($comment->text); ?></span>
+                        <div class="w-[800px] text-1xl break-words"><?php echo e($comment->name); ?>:<?php echo e($comment->text); ?></div>
                         <?php if(Auth::check()): ?>
                             <?php if($comment->user_id == Auth::user()->id): ?>
 
