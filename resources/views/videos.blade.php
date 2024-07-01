@@ -6,6 +6,8 @@
         <div>
             <p><a>Название:</a>{{$ar->title}} <span>Описание:</span>{{$ar->description}} Канал:{{$name}}
                 Категория:{{$category_name}}</p>
+            <p>{{$time}}</p>
+
             <video width="800" controls="controls">
                 <source src="{{asset('storage/video') . '/' . $ar->videoSRC}}"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>

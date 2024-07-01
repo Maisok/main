@@ -9,6 +9,7 @@ use App\Models\Categories;
 use App\Models\Like;
 use App\Models\Videos;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class VideoController extends Controller
 {
@@ -34,6 +35,14 @@ class VideoController extends Controller
         $comments=Comment::where('videos_id', $id)->join('users','user_id','=','users.id')->select('users.name', 'comments.*')->get();
         $likes=Like::where('videos_id', $id)->count();
         $dislikes=Dislike::where('videos_id', $id)->count();
+        foreach($arr as $ar){
+            $dt=Carbon::now();
+            $time=$dt->diffForHumans($ar->created_at);
+        }
+
+        // print_r($arr);
+        $dt=Carbon::now();
+        $dt->diffForHumans();
 
         return view('videos', [
            'arr' => $arr, 
@@ -41,7 +50,8 @@ class VideoController extends Controller
             'category_name'=>$category_name,
             'comments'=> $comments,
             'likes'=> $likes, 
-            'dislike'=> $dislikes
+            'dislike'=> $dislikes,
+            'time' => $time
         ]);
     }
 

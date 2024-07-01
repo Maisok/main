@@ -16,6 +16,8 @@
             <p><a>Название:</a><?php echo e($ar->title); ?> <span>Описание:</span><?php echo e($ar->description); ?> Канал:<?php echo e($name); ?>
 
                 Категория:<?php echo e($category_name); ?></p>
+            <p><?php echo e($time); ?></p>
+
             <video width="800" controls="controls">
                 <source src="<?php echo e(asset('storage/video') . '/' . $ar->videoSRC); ?>"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
