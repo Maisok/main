@@ -21,6 +21,10 @@
                     Добавить видео
                     </x-nav-link>
 
+                    <x-nav-link  :href="route('myvideos')">
+                    Мои видео
+                    </x-nav-link>
+
                     @if(Auth::user()->role=='admin')
                     <x-nav-link  :href="route('admin.cat')">
                     Администрирование видео

@@ -11,13 +11,14 @@ class DislikeController extends Controller
 {
     public function dislikeadd(Request $request)
     {
-        $dislike = Dislike::select('id')->where('user_id', Auth::user()->id and 'videos_id', $request->id_dislike)->first();
-        $like = Like::select('id')->where('user_id', Auth::user()->id and 'videos_id', $request->id_dislike)->first();
+        $dislike = Dislike::select('id')->where('user_id', Auth::user()->id)->whereAll(['videos_id'], '=', $request->id_dislike)->first();
+        
+        $like = Like::select('id')->where('user_id', Auth::user()->id)->whereAll(['videos_id'], '=', $request->id_dislike)->first();
         if (isset($dislike)) {
-            Dislike::where('user_id', Auth::user()->id and 'videos_id', $request->id_dislike)->delete();
+            Dislike::where('user_id', Auth::user()->id)->whereAll(['videos_id'], '=', $request->id_dislike)->delete();
             return to_route('videos', $request->id_dislike);
         } else if (isset($like)) {
-            Like::where('user_id', Auth::user()->id and 'videos_id', $request->id_dislike)->delete();
+            Like::where('user_id', Auth::user()->id)->whereAll(['videos_id'], '=', $request->id_dislike)->delete();
             Dislike::insert([
                 'user_id' => Auth::user()->id,
                 'videos_id' => $request->id_dislike

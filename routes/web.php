@@ -14,6 +14,11 @@ Route::get('admin', [ShowAdminController::class, 'showvideos',])->middleware(['a
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\DislikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ShowVideosController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\AddVideoController;
+
+
 
 Route::middleware('auth')->group(function () {
     Route::post('admin', [ShowAdminController::class, 'admincat'])->name('admin.cat');
@@ -24,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::post('comments', [CommentController::class, 'addcomments'])->name('comments');
     Route::post('editcomment', [CommentController::class, 'editcomment'])->name('editcomment');
     Route::delete('deletecomment', [CommentController::class, 'deletecomment'])->name('deletecomment');
+    Route::get('myvideos', [ShowVideosController::class, 'myvideos'])->name('myvideos');
+    Route::get("myvid/{id}", [VideoController::class, 'myvid'])->name('myvid');
+    Route::post("myvid/{id}", [AddVideoController::class, 'editmyvid'])->name('myvid');
 });
 
 
@@ -51,17 +59,13 @@ use App\Http\Controllers\UsersController;
 Route::get("users", [UsersController::class, 'index']);
 Route::get("users/{id}", [UsersController::class, 'show']);
 
-use App\Http\Controllers\AddVideoController;
-
 Route::get('addvideo', [AddVideoController::class, 'showcategory'])->name('addvideo');
 
 Route::post('pushvideos', [AddVideoController::class, 'addvideos'])->name('pushvideos');
 
-use App\Http\Controllers\ShowVideosController;
+
 
 Route::get('/', [ShowVideosController::class, 'show'])->name('main');
-
-use App\Http\Controllers\VideoController;
 
 Route::get("video", [VideoController::class, 'index']);
 Route::get("video/{id}", [VideoController::class, 'show'])->name('videos');
