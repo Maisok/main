@@ -2,14 +2,23 @@
 
 
 
-    @foreach ($arr as $ar)
+
+
+
+
+
+<div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                @foreach ($arr as $ar)
         <div>
             <p><a>Название:</a>{{$ar->title}} <span>Описание:</span>{{$ar->description}} Канал:{{$name}}
                 Категория:{{$category_name}}</p>
             <p>{{$time}}</p>
 
-            <video width="800" controls="controls">
-                <source src="{{asset('storage/video') . '/' . $ar->videoSRC}}"
+            <video width="800" controls="controls" class='rounded-xl'>
+                <source src="{{asset('video') . '/' . $ar->videoSRC}}"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
             </video>
             @if(Auth::check())
@@ -90,4 +99,27 @@
             </div>
         </div>
     @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 </x-app-layout>
