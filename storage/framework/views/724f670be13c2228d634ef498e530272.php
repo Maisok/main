@@ -1,0 +1,1 @@
+<p>Хостинг</p><?php /**PATH C:\Users\21038\Desktop\Новая папка\main\resources\views/components/application-logo.blade.php ENDPATH**/ ?>
